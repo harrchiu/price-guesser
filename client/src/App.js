@@ -2,49 +2,9 @@ import { Row, Col, Button, Space, Typography, Input, Form } from "antd";
 import { Card } from "./components/Card/Card";
 import { useState } from "react";
 
-// import firebase from "firebase/app";
-
 import "./App.css";
-// var scrape = require("mongoose");
 
 const { Text } = Typography;
-
-// const mongoose = require("mongoose");
-
-// const uri =
-//   "";
-
-// mongoose.connect(uri, { useNewUrlParser: true }, () =>
-//   console.log("we are in boys")
-// );
-// const db = mongoose.connection;
-// db.once("open", (_) => {
-//   console.log("Database connected:", uri);
-// });
-
-// db.on("error", (err) => {
-//   console.error("connection error:", err);
-// });
-
-// // npm web-scraper stuff
-
-// const npmScraper = async () => {
-//   const options = {
-//     urls: [
-//       "https://www.amazon.ca/Best-Sellers-generic/zgbs/?ref_=nav_cs_bestsellers_5e07a0361d744326ae799da4b354adca",
-//     ],
-//     directory: "/path/to/save/",
-//   };
-
-//   // with async/await
-//   const result = await scrape(options);
-//   console.log(result);
-
-//   // with promise
-
-//   return result;
-//   // scrape(options, (error, result) => {});
-// };
 
 function App() {
   const [titleInput, setTitleInput] = useState("");
