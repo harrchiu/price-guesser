@@ -12,7 +12,7 @@ const TABLE_NAME = process.env.TABLE_NAME;
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 // read to DB
-const getItems = async () => {
+const getItemById = async () => {
   const params = {
     TableName: TABLE_NAME,
   };
@@ -36,4 +36,4 @@ const newItem = {
 };
 
 await upsertItem(newItem);
-await getItems();
+await getItemById();
