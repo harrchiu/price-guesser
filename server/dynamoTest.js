@@ -1,28 +1,7 @@
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
-import express from "express";
-
-import getItemRoute from "./routes/getItem.js";
-import upsertItemRoute from "./routes/upsertItem.js";
-import scraperTestRoute from "./routes/scrapertest.js";
-
 dotenv.config();
 
-// ----------------------------------- app -----------------------------------
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded());
-
-app.use("/getItem", getItemRoute);
-app.use("/upsertItem", upsertItemRoute);
-app.use("/scraperTest", scraperTestRoute);
-app.use("/", (req, res) => {
-  console.log(req.body);
-  res.send("this is the root backend");
-});
-
-// ----------------------------------- DynamoDB -----------------------------------
 AWS.config.update({
   region: process.env.DB_REGION,
 });
@@ -50,6 +29,11 @@ const upsertItem = async (item) => {
   return await docClient.put(params).promise();
 };
 
-app.listen(5000);
+const newItem = {
+  id: "4",
+  name: "henry the asdfasdf",
+  health: "wtheck is this",
+};
 
-export { getItems, upsertItem };
+await upsertItem(newItem);
+await getItems();
