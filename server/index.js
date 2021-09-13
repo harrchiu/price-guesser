@@ -7,8 +7,8 @@ import testRoutes from "./routes/test.js";
 
 const app = express();
 
-app.use(express.urlencoded());
 app.use(express.json());
+app.use(express.urlencoded());
 
 app.use("/db", db);
 app.use("/test", testRoutes);
@@ -20,6 +20,11 @@ app.use("/", (req, res) => {
 dotenv.config();
 
 const uri = process.env.MONGODB_CONNECTIONSTRING;
+
+const obj = {
+  one: "one",
+  two: "two",
+};
 
 mongoose.connect(uri, { useNewUrlParser: true }, () =>
   console.log("we are in boys")

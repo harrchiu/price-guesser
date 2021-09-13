@@ -1,7 +1,7 @@
 import express from "express";
-import cheerio from "cheerio";
-import fetch from "node-fetch";
 import Product from "../models/Product.js";
+
+import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -10,6 +10,31 @@ const router = express.Router();
 // });
 
 router.get("/", async (req, res) => {
+  console.log("hello");
+  try {
+    // var found = await Product.find({ seller: "hello" });
+    var found = await Product.find({});
+    console.log(found.body);
+    // var found = await Product.findById("61149a2517cca0abcdf63bc8");
+  } catch (err) {
+    console.log(err);
+    res.json({ message: err });
+  }
+
+  // console.log("this", found.body);
+  // res.json(found.body);
+
+  return;
+  var collections = mongoose.connections[0].collections;
+  var names = [];
+
+  Object.keys(collections).forEach(function (k) {
+    names.push(k);
+  });
+
+  console.log(names);
+  return;
+
   var allp = Product.find(
     { seller: "asdfs" },
     "seller price imageSrc",
