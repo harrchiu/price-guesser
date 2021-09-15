@@ -1,0 +1,47 @@
+/* @import (reference) "~antd/lib/style/themes/default.css"; */
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1 0;
+}
+
+.game-slot {
+  flex-grow: 1;
+  border: 1px solid gray;
+
+  background-size: cover;
+  background-position: center center;
+}
+
+.game-slot__mask {
+  background-color: rgba(50, 50, 50, 0.6);
+  height: 100%;
+  width: 100%;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.game-slot-background__image {
+  height: 100%;
+}
+
+.product-info {
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 300px;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.product-info__title {
+}
+.product-info__button {
+  color: green;
+  /* width: 200px; */
+}

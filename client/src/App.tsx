@@ -1,12 +1,14 @@
-import { Row, Col, Button, Space, Typography, Input, Form } from "antd";
-import { useState } from "react";
+// import { Row, Col, Button, Space, Typography, Input, Form } from "antd";
+import GamePage from "./GamePage/index";
 
 import "./App.css";
 
-const { Text } = Typography;
-
-function App() {
-  return <h1>hello there</h1>;
-}
+const App = () => {
+  return (
+    <div className="App">
+      <GamePage />
+    </div>
+  );
+};
 
 export default App;
