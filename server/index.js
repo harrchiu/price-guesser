@@ -1,6 +1,7 @@
 import AWS from "aws-sdk";
 import dotenv from "dotenv";
 import express from "express";
+import cors from "cors";
 
 import getRandomItemRoute from "./routes/getRandomItem.js";
 import upsertItemRoute from "./routes/upsertItem.js";
@@ -12,6 +13,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded());
 
 app.use("/getRandomItem", getRandomItemRoute);
@@ -46,7 +48,7 @@ const getItemById = async (id) => {
     item = await docClient.get(params).promise();
   } catch (e) {
     console.log(JSON.stringify(e));
-    return {};
+    return { e };
   }
 
   return item;
@@ -60,6 +62,15 @@ const upsertItem = async (item) => {
   };
   return await docClient.put(params).promise();
 };
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "localhost:5000");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 app.listen(5000);
 

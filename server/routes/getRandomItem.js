@@ -1,18 +1,30 @@
 import express from "express";
 import { getItemById, upsertItem } from "../index.js";
 
+const PRODUCT_DB_ITEM_COUNT = 5;
+
 const router = express.Router();
 
 // get random item
 router.get("/", async (req, res) => {
-  const randId = "4"; //Math.random;
-  var item;
+  console.log(req.body);
+  var retQuantity = req.body?.count ?? 1;
+  if (retQuantity > PRODUCT_DB_ITEM_COUNT) retQuantity = PRODUCT_DB_ITEM_COUNT; // all diff, all random
 
-  item = await getItemById(randId);
-  res.send(item.Item);
+  var retItems = [];
+  var usedIds = [];
+  var randId;
+  for (var i = 0; i < retQuantity; i++) {
+    do {
+      randId = Math.floor(Math.random() * PRODUCT_DB_ITEM_COUNT) + 1;
+    } while (usedIds.includes(randId));
+
+    var response = await getItemById(randId.toString());
+    retItems.push(response.Item);
+    usedIds.push(randId);
+  }
+  res.send(retItems);
+  // res.send(retItems[0]);
 });
-
-// router.post("/", (req, res) => {
-// });
 
 export default router;
