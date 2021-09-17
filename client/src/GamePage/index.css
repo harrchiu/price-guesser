@@ -6,29 +6,41 @@
   flex: 1 0;
 }
 
-.prompt-box {
+.prompt-section {
   position: absolute;
 
   left: 50%;
-  top: 75px;
+  top: 30px;
   transform: translate(-50%, 0%);
 
-  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+
+  text-align: center;
   font-size: 14px;
+  border-color: transparent;
+  color: black;
+
   background-color: yellow;
   padding: 15px;
   border-radius: 10px;
   border-color: transparent;
 }
-.prompt-box__title {
+
+.prompt-section__title {
   font-size: 25px;
   font-weight: bold;
-  color: black;
+}
+
+.prompt-section__score {
+  padding-top: 5px;
+  font-size: 14px;
 }
 
 .game-slot {
-  flex-grow: 1;
-  /* border: 1px solid yellow; */
+  flex: 1 0;
 
   background-size: cover;
   background-position: center center;
@@ -38,50 +50,40 @@
   background-color: rgba(50, 50, 50, 0.85);
   height: 100%;
   width: 100%;
-
-  align-items: center;
-  justify-content: center;
-}
-
-.game-slot-background__image {
-  height: 100%;
 }
 
 .product-info {
-  padding: 30px;
-
   color: #ffffff;
+  font-weight: bold;
 
+  height: 100%;
   display: flex;
   flex-direction: column;
-
-  width: 300px;
-  /* align-items: center; */
   justify-content: center;
+  align-items: center;
 }
 
 .product-info__title {
-  font-size: 32px;
-  font-weight: bold;
-
+  font-size: 34px;
+  max-width: 325px;
+  text-align: center;
   padding-bottom: 10px;
+
+  text-overflow: clip;
+  word-wrap: normal;
 }
 .product-info__price {
-  font-size: 18px;
-  font-weight: bold;
-
+  font-size: 22px;
   padding-bottom: 10px;
 }
+
+.product-info__button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .product-info__button {
+  bottom: 150px;
+
   position: absolute;
-
-  font-size: 16px;
-  width: 200px;
-  height: 40px;
-  border-radius: 5px;
-  bottom: 20px;
-
-  border-color: transparent;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
