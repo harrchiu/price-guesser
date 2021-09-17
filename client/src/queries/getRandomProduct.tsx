@@ -6,8 +6,8 @@ import { Product } from "../GamePage";
 //     .get(`http://localhost:5000/getRandomItem/${cnt}`)
 //     .then((response) => response.data);
 // };
-const getRandomProduct = async (cnt: number) => {
-  return await axios
+const getRandomProduct = (cnt: number) => {
+  return axios
     .get(`http://localhost:5000/getRandomItem/${cnt}`)
     .then((response) => response.data);
 };

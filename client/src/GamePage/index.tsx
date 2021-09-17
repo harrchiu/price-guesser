@@ -16,34 +16,44 @@ interface Product {
 
 const GamePage = () => {
   const [curProducts, setCurProducts] = useState<Product[]>([
-    { title: "f", imageSrc: "sd", price: 3 },
-    { title: "g", imageSrc: "sd", price: 3 },
+    { title: "f", imageSrc: "sd" },
+    { title: "g", imageSrc: "sd" },
   ]);
 
   const buttonClick = async () => {
-    var newProduct: any = await getRandomProduct(1);
-    setCurProducts([
-      curProducts[1],
-      {
-        title: newProduct[0].title,
-        price: newProduct[0].price,
-        imageSrc: newProduct[0].img,
-      },
-    ]);
+    var response: any = getRandomProduct(1);
+    response.then((newProduct: any) => {
+      console.log(newProduct);
+      setCurProducts([
+        curProducts[1],
+        {
+          title: newProduct[0].title,
+          price: newProduct[0].price,
+          imageSrc: newProduct[0].img,
+        },
+      ]);
+    });
   };
 
-  // useEffect(() => {
-  //   var newProduct: any = getRandomProduct(1).then(response);
+  useEffect(() => {
+    var response: any = getRandomProduct(2);
 
-  //   setCurProducts([
-  //     curProducts[1],
-  //     {
-  //       title: newProduct[0].title,
-  //       price: newProduct[0].price,
-  //       imageSrc: newProduct[0].img,
-  //     },
-  //   ]);
-  // }, []);
+    response.then((newProduct: any) => {
+      console.log(newProduct);
+      setCurProducts([
+        {
+          title: newProduct[0].title,
+          price: newProduct[0].price,
+          imageSrc: newProduct[0].img,
+        },
+        {
+          title: newProduct[1].title,
+          price: newProduct[1].price,
+          imageSrc: newProduct[1].img,
+        },
+      ]);
+    });
+  }, []);
 
   const gameSlotIndexArray = [0, 1];
   return (
