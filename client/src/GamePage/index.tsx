@@ -6,6 +6,7 @@ import getRandomProduct from "../queries/getRandomProduct";
 
 import "./index.css";
 import GameSlot from "./GameSlot";
+import { couldStartTrivia } from "typescript";
 
 interface Product {
   title?: string;
@@ -15,67 +16,24 @@ interface Product {
 
 const GamePage = () => {
   const [curProducts, setCurProducts] = useState<Product[]>([
-    { title: "f" },
-    { title: "g" },
+    { title: "f", imageSrc: "sd", price: 3 },
+    { title: "g", imageSrc: "sd", price: 3 },
   ]);
 
-  const buttonClick = () => {
-    // var newDualQuery = await getRandomItem(2);
-    // console.log(newDualQuery);
-
-    // var newProduct: any = getRandomProduct(2);
-    var reqData = {
-      count: 2,
-    };
-
-    var newProduct: any = getRandomProduct(2);
-    // axios
-    //   .get("http://localhost:5000/getRandomItem?count=2",
-    //     // params: {
-    //     //   count: 2,
-    //     // },
-    //     data: $.param(reqData)
-    //   )
-    //   .then((response) => {
-    //     console.log("something really good happened");
-    //     console.log(response);
-    //     newProduct = response;
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    axios({
-      method: "get",
-      url: "http://localhost:5000/getRandomItem",
-      data: $.param(reqData),
-    })
-      .then((response) => {
-        console.log("something really good happened");
-        console.log(response);
-        newProduct = response;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    console.log("alskdjfalksdjf", newProduct);
-
+  const buttonClick = async () => {
+    var newProduct: any = await getRandomProduct(1);
     setCurProducts([
       curProducts[1],
       {
         title: newProduct[0].title,
         price: newProduct[0].price,
         imageSrc: newProduct[0].img,
-        // title: newProduct.title,
-        // price: newProduct.price,
-        // imageSrc: newProduct.img,
       },
     ]);
   };
 
   // useEffect(() => {
-  //   var newProduct = getRandomItem(2);
+  //   var newProduct: any = getRandomProduct(1).then(response);
 
   //   setCurProducts([
   //     curProducts[1],
