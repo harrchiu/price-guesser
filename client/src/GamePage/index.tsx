@@ -135,7 +135,7 @@ const GamePage = () => {
         <HeaderSection />
 
         <div className="prompt-section">
-          <div className="prompt-section__title">Which one costs more?</div>
+          <div className="prompt-section__title">So, which one costs more?</div>
           <div className="prompt-section__score">Score: {curScore}</div>
         </div>
         {gameSlotIndexArray.map((index) => {

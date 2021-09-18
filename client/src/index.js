@@ -1,13 +1,27 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import GamePage from "./GamePage";
+import LeaderboardPage from "./LeaderboardPage";
+
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <GamePage />
+    <Router>
+      <Switch>
+        <Route path="/" exact render={() => <GamePage />} />
+        <Route
+          path={["/leaderboard", "/leaderboards"]}
+          exact
+          render={() => <LeaderboardPage />}
+        />
+        <Route render={() => <GamePage />} />
+      </Switch>
+    </Router>
   </React.StrictMode>,
+
   document.getElementById("root")
 );
 

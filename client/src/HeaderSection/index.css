@@ -4,17 +4,36 @@
   top: 20px;
   left: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: baseline;
 }
 
 .header-wrapper > a {
   font-size: 16px;
-  padding-right: 10px;
+  padding-bottom: 1px;
   color: hsl(0, 2%, 87%);
 }
 
 .header-wrapper > a:hover {
   transition: all 0.2s ease;
   color: #ffff85;
+}
+
+.header-wrapper--dark > a {
+  color: black;
+}
+
+.header-wrapper--dark > a:hover {
+  color: purple;
+}
+
+.header-wrapper > a.me-me-me:hover {
+  color: #da76d7;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
 }
