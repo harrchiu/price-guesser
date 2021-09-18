@@ -1,0 +1,43 @@
+.name-entry-modal-mask {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(50, 50, 50, 0.75);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.name-entry-modal {
+  background-color: #ffff85;
+  border-radius: 12px;
+  border-color: transparent;
+
+  padding: 40px;
+
+  max-width: 370px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.name-entry-modal__title {
+  font-weight: bold;
+  font-size: 24px;
+  padding-bottom: 15px;
+}
+.name-entry-modal__description {
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+.name-entry-modal__proceed {
+  background-color: white;
+  border: 1px solid gray;
+}
+.name-entry-modal__proceed:hover {
+  background-color: #059d05;
+}

@@ -110,12 +110,7 @@ const GamePage = () => {
       console.log(error);
     }
 
-    document.cookie = "lastVisit=" + Math.round(Date.now() / 1000).toString();
-    console.log(document.cookie);
-    console.log(lastVisitedTime);
-
     const timeSinceLastVisit = Math.round(Date.now() / 1000) - lastVisitedTime;
-    console.log(timeSinceLastVisit);
     setIsGuideModalVisible(timeSinceLastVisit > MINIMUM_VISIT_GAP_FOR_MODAL);
   }, []);
 

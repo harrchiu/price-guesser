@@ -1,6 +1,9 @@
 export const HOME_PAGE_URL = "http://localhost:3000";
-export const CORRECT_TIMEOUT = 1000;
-export const INCORRECT_TIMEOUT = 1500;
+
+export const CORRECT_TIMEOUT = 0;
+export const INCORRECT_TIMEOUT = 0;
+// export const CORRECT_TIMEOUT = 1000;
+// export const INCORRECT_TIMEOUT = 1500;
 
 export const MINIMUM_VISIT_GAP_FOR_MODAL = 2; //60 * 60; // 1 hour;
 
