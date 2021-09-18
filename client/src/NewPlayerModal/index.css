@@ -1,0 +1,43 @@
+.new-player-modal-mask {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(50, 50, 50, 0.75);
+
+  align-items: center;
+  justify-content: center;
+}
+
+.new-player-modal {
+  background-color: #fafa95;
+  border-radius: 12px;
+  border-color: transparent;
+
+  padding: 40px;
+
+  max-width: 370px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.new-player-modal__title {
+  font-weight: bold;
+  font-size: 24px;
+  padding-bottom: 15px;
+}
+.new-player-modal__description {
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+.new-player-modal__proceed {
+  background-color: white;
+  border: 1px solid gray;
+}
+.new-player-modal__proceed:hover {
+  background-color: #059d05;
+}

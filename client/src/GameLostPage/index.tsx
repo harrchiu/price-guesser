@@ -1,8 +1,8 @@
 import {
   PUBLIC_PAGE_URL,
   AMOUNT_OF_JEFF_BEZOS_GIFS_IN_MEDIA_FOLDER_AS_A_NUMBER,
-  LOW_SCORE_LOSING_VERBS,
-  LOSING_VERBS,
+  LOW_SCORE_LOSING_PHRASES,
+  LOSING_PHRASES,
 } from "../publicConstants";
 
 import "./index.css";
@@ -13,9 +13,10 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
       Math.random() * AMOUNT_OF_JEFF_BEZOS_GIFS_IN_MEDIA_FOLDER_AS_A_NUMBER
     ) + 1;
 
-  const losingVerbArr = score <= 2 ? LOW_SCORE_LOSING_VERBS : LOSING_VERBS;
-  const losingVerb =
-    losingVerbArr[Math.floor(Math.random() * losingVerbArr.length)];
+  const losingPhraseArr =
+    score <= 2 ? LOW_SCORE_LOSING_PHRASES : LOSING_PHRASES;
+  const losingPhrase =
+    losingPhraseArr[Math.floor(Math.random() * losingPhraseArr.length)];
 
   var pageBackground;
 
@@ -34,18 +35,24 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
       }}
     >
       <div className="game-lost-page__mask">
-        <div className="game-lost-page__message">you lost :(</div>
-        <div className="game-lost-page__score">
-          You price guessed {score} product{score !== 1 ? "s" : ""} correctly
-          after {losingVerb}
+        <div className="game-lost-prompt">
+          <div className="game-lost-prompt__message">You lost.</div>
+          <div className="game-lost-prompt__score">
+            You price guessed {score} product{score !== 1 ? "s" : ""} correctly{" "}
+            {losingPhrase}
+          </div>
+
+          <div className="play-again-button-wrapper">
+            <button
+              className="play-again-button"
+              onClick={() => {
+                window.location.replace(PUBLIC_PAGE_URL);
+              }}
+            >
+              Play again!
+            </button>
+          </div>
         </div>
-        <button
-          onClick={() => {
-            window.location.replace(PUBLIC_PAGE_URL);
-          }}
-        >
-          Play again!
-        </button>
       </div>
     </div>
   );

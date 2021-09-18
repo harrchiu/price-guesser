@@ -10,7 +10,7 @@
   position: absolute;
 
   left: 50%;
-  top: 30px;
+  top: 50px;
   transform: translate(-50%, 0%);
 
   display: flex;
@@ -23,8 +23,8 @@
   border-color: transparent;
   color: black;
 
-  background-color: yellow;
-  padding: 15px;
+  background-color: #ffff85;
+  padding: 20px;
   border-radius: 10px;
   border-color: transparent;
 }
@@ -36,7 +36,7 @@
 
 .prompt-section__score {
   padding-top: 5px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .game-slot {
@@ -50,16 +50,19 @@
   background-color: rgba(50, 50, 50, 0.85);
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-info {
   color: #ffffff;
   font-weight: bold;
 
-  height: 100%;
+  flex: 1 0;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -72,18 +75,28 @@
   text-overflow: clip;
   word-wrap: normal;
 }
-.product-info__price {
+
+.product-info__price,
+.product-info__price--dummy {
   font-size: 22px;
   padding-bottom: 10px;
 }
+.product-info__price--dummy {
+  color: transparent;
+}
 
 .product-info__button-wrapper {
+  flex: 1 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  /* position: absolute; */
+  bottom: 150px;
 }
 
 .product-info__button {
-  bottom: 150px;
-
-  position: absolute;
+  /* bottom: 150px;
+  position: absolute; */
 }

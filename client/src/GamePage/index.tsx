@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import cookie from "cookie";
 import getRandomProduct from "../queries/getRandomProduct";
 import GameSlot from "./GameSlot";
 import GameLostPage from "../GameLostPage";
 import {
   CORRECT_TIMEOUT,
   INCORRECT_TIMEOUT,
+  MINIMUM_VISIT_GAP_FOR_MODAL,
   JEFF_WAITING_SRC,
 } from "../publicConstants";
+
+import NewPlayerModal from "../NewPlayerModal";
 
 import "./index.css";
 
@@ -38,6 +42,7 @@ const GamePage = () => {
   ]);
   const [curScore, setCurScore] = useState(0);
   const [gameState, setGameState] = useState(GameState.WAITING_FOR_RESPONSE);
+  const [isGuideModalVisible, setIsGuideModalVisible] = useState(true);
 
   const buttonClick = async (productPrice: number) => {
     if (gameState === GameState.DISPLAYING_PRICE) return;
@@ -51,8 +56,8 @@ const GamePage = () => {
       setGameState(GameState.DISPLAYING_PRICE);
 
       setTimeout(() => {
-        var response: any = getRandomProduct(1);
-        response.then((newProduct: any) => {
+        var response = getRandomProduct(1);
+        response.then((newProduct) => {
           console.log(newProduct);
           setCurProducts([
             curProducts[1],
@@ -75,9 +80,9 @@ const GamePage = () => {
 
   // render two products on page load
   useEffect(() => {
-    var response: any = getRandomProduct(2);
+    var response = getRandomProduct(2);
 
-    response.then((newProduct: any) => {
+    response.then((newProduct) => {
       console.log(newProduct);
       setCurProducts([
         {
@@ -92,6 +97,25 @@ const GamePage = () => {
         },
       ]);
     });
+
+    const cookies = cookie.parse(document.cookie);
+    var lastVisitedTime;
+    console.log(document.cookie);
+
+    try {
+      lastVisitedTime = parseInt(cookies?.lastVisit);
+    } catch (error) {
+      lastVisitedTime = 0;
+      console.log(error);
+    }
+
+    document.cookie = "lastVisit=" + Math.round(Date.now() / 1000).toString();
+    console.log(document.cookie);
+    console.log(lastVisitedTime);
+
+    const timeSinceLastVisit = Math.round(Date.now() / 1000) - lastVisitedTime;
+    console.log(timeSinceLastVisit);
+    setIsGuideModalVisible(timeSinceLastVisit > MINIMUM_VISIT_GAP_FOR_MODAL);
   }, []);
 
   // return either in-game or lost page
@@ -100,21 +124,27 @@ const GamePage = () => {
     return <GameLostPage score={curScore} />;
   }
   return (
-    <div className="game-container">
-      <div className="prompt-section">
-        <div className="prompt-section__title">Which one costs more?</div>
-        <div className="prompt-section__score">Score: {curScore}</div>
+    <>
+      <div className="game-container">
+        <div className="prompt-section">
+          <div className="prompt-section__title">Which one costs more?</div>
+          <div className="prompt-section__score">Score: {curScore}</div>
+        </div>
+        {gameSlotIndexArray.map((index) => {
+          return (
+            <GameSlot
+              product={curProducts[index]}
+              buttonClick={buttonClick}
+              gameState={gameState}
+            />
+          );
+        })}
       </div>
-      {gameSlotIndexArray.map((index) => {
-        return (
-          <GameSlot
-            product={curProducts[index]}
-            buttonClick={buttonClick}
-            gameState={gameState}
-          />
-        );
-      })}
-    </div>
+      <NewPlayerModal
+        isVisible={isGuideModalVisible}
+        setVisible={setIsGuideModalVisible}
+      />
+    </>
   );
 };
 
