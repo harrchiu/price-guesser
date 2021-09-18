@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   var scores = scoresString?.Item.values.split("@");
   var dates = datesString?.Item.values.split("@");
 
-  console.log("ab");
+  console.log("a");
   res.send({ names, scores, dates });
   // res.send({ namesString });
 });

@@ -1,9 +1,7 @@
 export const HOME_PAGE_URL = "http://localhost:3000";
-export const LEADERBOARD_PAGE_URL = "http://localhost:3000";
-// export const CORRECT_TIMEOUT = 0; //1000;
 export const CORRECT_TIMEOUT = 1000;
-// export const INCORRECT_TIMEOUT = 0; //1500;
 export const INCORRECT_TIMEOUT = 1500;
+
 export const MINIMUM_VISIT_GAP_FOR_MODAL = 2; //60 * 60; // 1 hour;
 
 export const AMOUNT_OF_JEFF_BEZOS_GIFS_IN_MEDIA_FOLDER_AS_A_NUMBER = 4;
@@ -22,4 +20,19 @@ export const LOSING_PHRASES = [
   "but forgot to blink.",
   "and could not sustain the pressure.",
   "but Amazon changed their prices. 🤷‍♀️",
+];
+
+export const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
 ];

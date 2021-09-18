@@ -8,16 +8,31 @@
   justify-content: center;
 }
 
-/* .leaderboard-table {
-  height: 100%;
-  width: 100%; 
-*/
 .leaderboard-table {
   padding: 20px;
   border-spacing: 10px;
+  text-align: center;
 }
 
 th {
   padding: 10px;
   background-color: rgb(142, 216, 250);
+}
+
+.leaderboard-table-1-place {
+  color: #d3ad12;
+}
+.leaderboard-table-2-place {
+  color: #8c8a8a;
+}
+.leaderboard-table-3-place {
+  color: #915e5e;
+}
+
+.leaderboard-table-bold {
+  font-weight: bold;
+}
+
+.timezone-statement {
+  /* position: absolute; */
 }

@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { ReactElement } from "react";
 
 import "./index.css";
 
@@ -11,8 +12,11 @@ const HeaderSection: React.FC<{ isLeaderboards?: Boolean }> = ({
         "header-wrapper--dark": isLeaderboards,
       })}
     >
-      {isLeaderboards && <a href="/">Home</a>}
-      {!isLeaderboards && <a href="/leaderboard">Leaderboards</a>}
+      {isLeaderboards ? (
+        <a href="/">Home</a>
+      ) : (
+        <a href="/leaderboard">Leaderboards</a>
+      )}
       <a href="https://github.com/harrchiu/price-guesser" target="_blank">
         Github
       </a>
@@ -23,4 +27,11 @@ const HeaderSection: React.FC<{ isLeaderboards?: Boolean }> = ({
   );
 };
 
+const FooterSection: React.FC<{ component: ReactElement }> = ({
+  component,
+}) => {
+  return <div className={"footer-wrapper"}>{component}</div>;
+};
+
+export { HeaderSection, FooterSection };
 export default HeaderSection;
