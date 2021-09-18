@@ -18,16 +18,16 @@ const GameSlot: React.FC<{
       }}
     >
       <div className="game-slot__mask">
-        <div className="product-info">
+        <div className="product-info-roof" />
+        <div className="product-info-upper">
           <div className="product-info__title">{product.title}</div>
         </div>
-        <div className="product-info__button-wrapper">
+        <div className="product-info-lower">
           {isPriceVisible ? (
             <div className="product-info__price">${product.price}</div>
           ) : (
             <div className="product-info__price--dummy">$nice try</div>
           )}
-
           <button
             className="product-info__button"
             onClick={() => {

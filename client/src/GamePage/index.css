@@ -23,7 +23,7 @@
   border-color: transparent;
   color: black;
 
-  background-color: #ffff85;
+  background-color: #ffff85f7;
   padding: 20px;
   border-radius: 10px;
   border-color: transparent;
@@ -47,28 +47,34 @@
 }
 
 .game-slot__mask {
-  background-color: rgba(50, 50, 50, 0.85);
+  background-color: rgba(50, 50, 50, 0.89);
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-}
+  justify-content: space-around;
 
-.product-info {
   color: #ffffff;
   font-weight: bold;
+}
 
-  flex: 1 0;
-  /* height: 100%; */
+.product-info-roof {
+  /* flex: 3 2; */
+  flex-grow: 3;
+  flex-shrink: 2;
+}
+
+.product-info-upper {
+  flex: 1 2;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
 .product-info__title {
-  font-size: 34px;
-  max-width: 325px;
+  font-size: 38px;
+  max-width: 350px;
   text-align: center;
   padding-bottom: 10px;
 
@@ -76,27 +82,27 @@
   word-wrap: normal;
 }
 
+.product-info-lower {
+  /* flex: 4 0; */
+  min-height: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  padding-top: 10px;
+}
+
 .product-info__price,
 .product-info__price--dummy {
-  font-size: 22px;
-  padding-bottom: 10px;
+  font-size: 24px;
+  padding-bottom: 15px;
+  color: #6bd2ff;
 }
 .product-info__price--dummy {
   color: transparent;
 }
 
-.product-info__button-wrapper {
-  flex: 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  /* position: absolute; */
-  bottom: 150px;
-}
-
 .product-info__button {
-  /* bottom: 150px;
-  position: absolute; */
+  margin-top: 10px;
 }

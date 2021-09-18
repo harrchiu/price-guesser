@@ -1,0 +1,20 @@
+.header-wrapper {
+  position: absolute;
+
+  top: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.header-wrapper > a {
+  font-size: 16px;
+  padding-right: 10px;
+  color: hsl(0, 2%, 87%);
+}
+
+.header-wrapper > a:hover {
+  transition: all 0.2s ease;
+  color: #ffff85;
+}

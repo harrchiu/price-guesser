@@ -13,6 +13,7 @@ import {
 import NewPlayerModal from "../NewPlayerModal";
 
 import "./index.css";
+import HeaderSection from "../HeaderSection";
 
 interface Product {
   title: string;
@@ -121,11 +122,18 @@ const GamePage = () => {
   // return either in-game or lost page
   const gameSlotIndexArray = [0, 1];
   if (gameState === GameState.LOST) {
-    return <GameLostPage score={curScore} />;
+    return (
+      <>
+        <HeaderSection />
+        <GameLostPage score={curScore} />
+      </>
+    );
   }
   return (
     <>
       <div className="game-container">
+        <HeaderSection />
+
         <div className="prompt-section">
           <div className="prompt-section__title">Which one costs more?</div>
           <div className="prompt-section__score">Score: {curScore}</div>

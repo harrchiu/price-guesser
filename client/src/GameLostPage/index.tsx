@@ -1,5 +1,5 @@
 import {
-  PUBLIC_PAGE_URL,
+  HOME_PAGE_URL,
   AMOUNT_OF_JEFF_BEZOS_GIFS_IN_MEDIA_FOLDER_AS_A_NUMBER,
   LOW_SCORE_LOSING_PHRASES,
   LOSING_PHRASES,
@@ -46,7 +46,7 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
             <button
               className="play-again-button"
               onClick={() => {
-                window.location.replace(PUBLIC_PAGE_URL);
+                window.location.replace(HOME_PAGE_URL);
               }}
             >
               Play again!
