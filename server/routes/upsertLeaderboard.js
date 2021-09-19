@@ -3,7 +3,7 @@ import { upsertLeaderboard } from "../index.js";
 
 const router = express.Router();
 
-// get random item
+// change game values
 router.post("/", async (req, res) => {
   console.log(req.body.names_1);
   console.log(req.body.scores_1);

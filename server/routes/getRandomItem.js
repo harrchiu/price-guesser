@@ -1,13 +1,15 @@
 import express from "express";
-import { getItemById, upsertItem } from "../index.js";
-
-const PRODUCT_DB_ITEM_COUNT = 5;
+import { getProductbyId } from "../index.js";
 
 const router = express.Router();
 
 // get random item
 router.get("/:count", async (req, res) => {
   var retQuantity = req.params.count;
+
+  const productTableInfo = await getProductbyId("-1");
+
+  const PRODUCT_DB_ITEM_COUNT = productTableInfo?.Item?.productCount ?? 5;
 
   if (retQuantity > PRODUCT_DB_ITEM_COUNT) retQuantity = PRODUCT_DB_ITEM_COUNT; // all diff, all random
 
@@ -19,7 +21,7 @@ router.get("/:count", async (req, res) => {
       randId = Math.floor(Math.random() * PRODUCT_DB_ITEM_COUNT) + 1;
     } while (usedIds.includes(randId));
 
-    var response = await getItemById(randId.toString());
+    var response = await getProductbyId(randId.toString());
     retItems.push(response.Item);
     usedIds.push(randId);
   }

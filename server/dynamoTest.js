@@ -21,7 +21,7 @@ const getItemById = async () => {
 };
 
 // upsert DB
-const upsertItem = async (item) => {
+const upsertProduct = async (item) => {
   const params = {
     TableName: TABLE_NAME,
     Item: item,
@@ -35,5 +35,5 @@ const newItem = {
   health: "wtheck is this",
 };
 
-await upsertItem(newItem);
+await upsertProduct(newItem);
 await getItemById();

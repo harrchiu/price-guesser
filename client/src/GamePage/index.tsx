@@ -100,13 +100,11 @@ const GamePage = () => {
     const cookies = cookie.parse(document.cookie);
     var lastVisitedTime;
 
-    try {
-      lastVisitedTime = parseInt(cookies?.lastVisit);
-    } catch (error) {
+    if (cookies.lastVisit !== undefined) {
+      lastVisitedTime = parseInt(cookies.lastVisit);
+    } else {
       lastVisitedTime = 0;
-      console.log(error);
     }
-
     const timeSinceLastVisit = Math.round(Date.now() / 1000) - lastVisitedTime;
     setIsGuideModalVisible(timeSinceLastVisit > MINIMUM_VISIT_GAP_FOR_MODAL);
   }, []);

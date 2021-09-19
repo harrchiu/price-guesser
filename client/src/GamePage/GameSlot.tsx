@@ -24,7 +24,9 @@ const GameSlot: React.FC<{
         </div>
         <div className="product-info-lower">
           {isPriceVisible ? (
-            <div className="product-info__price">${product.price}</div>
+            <div className="product-info__price">
+              ${product.price.toFixed(2)}
+            </div>
           ) : (
             <div className="product-info__price--dummy">$nice try</div>
           )}

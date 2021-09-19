@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 
 import getRandomItemRoute from "./routes/getRandomItem.js";
-import upsertItemRoute from "./routes/upsertItem.js";
+import upsertProductRoute from "./routes/upsertProduct.js";
 import scraperTestRoute from "./routes/scrapertest.js";
 import getLeaderboardRoute from "./routes/getLeaderboard.js";
 import upsertLeaderboardRoute from "./routes/upsertLeaderboard.js";
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.urlencoded());
 
 app.use("/getRandomItem", getRandomItemRoute);
-app.use("/upsertItem", upsertItemRoute);
+app.use("/upsertProduct", upsertProductRoute);
 app.use("/scraperTest", scraperTestRoute);
 app.use("/getLeaderboard", getLeaderboardRoute);
 app.use("/upsertLeaderboard", upsertLeaderboardRoute);
@@ -44,7 +44,7 @@ const LEADERBOARD_TABLE_NAME = process.env.LEADERBOARD_TABLE_NAME;
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 // read all of DB
-const getItemById = async (id) => {
+const getProductbyId = async (id) => {
   const params = {
     TableName: PRODUCT_TABLE_NAME,
     Key: {
@@ -110,12 +110,17 @@ const upsertLeaderboard = async (names_1, scores_1, dates_1) => {
 };
 
 // upsert product DB
-const upsertItem = async (item) => {
+const upsertProduct = async (product) => {
   const params = {
     TableName: PRODUCT_TABLE_NAME,
-    Item: item,
+    Item: product,
   };
-  return await docClient.put(params).promise();
+
+  try {
+    await docClient.put(params).promise();
+  } catch (e) {
+    return e;
+  }
 };
 
 app.use(function (req, res, next) {
@@ -129,4 +134,4 @@ app.use(function (req, res, next) {
 
 app.listen(port);
 
-export { getItemById, upsertItem, getLeaderboard, upsertLeaderboard };
+export { getProductbyId, upsertProduct, getLeaderboard, upsertLeaderboard };
