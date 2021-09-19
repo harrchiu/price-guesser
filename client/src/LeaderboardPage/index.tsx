@@ -36,7 +36,6 @@ const extractDateWithTz = (unixTimeStamp: number, tzString: string) => {
 };
 
 const formatDate = (unixTimeStamp: number, tzString: string) => {
-  const nownow = Math.round(Date.now() / 1000);
   var dateArr = [];
 
   try {
@@ -44,7 +43,6 @@ const formatDate = (unixTimeStamp: number, tzString: string) => {
   } catch {
     dateArr = extractDateWithTz(unixTimeStamp, "America/Toronto");
   }
-  console.log(dateArr);
 
   var retString =
     dateArr[1] +

@@ -5,7 +5,7 @@ import fs from "fs";
 
 const router = express.Router();
 
-const test = (url) => {
+const test = async (url) => {
   const urls = [url];
 
   const testRequest = urls.map(async (url) => {
@@ -22,33 +22,42 @@ const test = (url) => {
     //   if (err) throw err;
     // });
 
-    // console.log($(".p13n-sc-truncate", "a").last());
-
     var titles = [];
-    $(".p13n-sc-truncate").each((item) => {
-      titles.push($(this).text());
+    var prices = [];
+    var images = [];
+    //".s-result-item"
+    $(
+      ".s-image",
+      ".s-image-square-aspect",
+      ".s-no-outline"
+      // ".rush-component",
+      // ".a-section",
+      // ".s-expand-height"
+      // "[class^=widgetId=search-results_],"
+      // --works kinda ^
+      // "div .s-image"
+    ).each((index, element) => {
+      console.log(element);
+      console.log($(element).attr("alt"));
+      titles.push($(element).attr("alt").trim());
+      images.push($(element).attr("src").trim());
     });
+
     console.log("here are the titles:", titles);
+    console.log("here are the images:", images);
+    console.log("here are the prices:", prices);
 
-    var product = {
-      title: $(".p13n-sc-truncate", "a").first().text().trim(),
-      price: $(".p13n-sc-price", "span").first().text().trim(),
-      this: $(".p13n-sc-truncate", "a").first().text().trim(),
-    };
-    console.log(product);
-
-    return product;
+    return { titles, images, prices };
   });
 
-  return Promise.all(testRequest);
+  return testRequest;
 };
 
-router.get("/", (req, res) => {
-  res.send(
-    test(
-      "https://www.amazon.ca/Best-Sellers-Gift-Cards/zgbs/gift-cards/ref=zg_bs_gift-cards_home_all?pf_rd_p=de43c7c4-89ee-4a4d-9cea-b3a73600c28b&pf_rd_s=center-1&pf_rd_t=2101&pf_rd_i=home&pf_rd_m=A3DWYIK6Y9EEQB&pf_rd_r=J23MEEN956S00CAQF4N3&pf_rd_r=J23MEEN956S00CAQF4N3&pf_rd_p=de43c7c4-89ee-4a4d-9cea-b3a73600c28b"
-    ).toString()
+router.get("/", async (req, res) => {
+  const testResult = await test(
+    "https://www.amazon.ca/s?k=office+items&rh=n%3A6304012011&dc&qid=1632012670&rnid=5264023011&ref=sr_nr_n_1"
   );
+  res.send(testResult);
 });
 
 export default router;

@@ -84,6 +84,7 @@
 
 .name-collection__button-wrapper {
   display: flex;
+  width: 100px;
   align-items: center;
 }
 .name-collection__button {

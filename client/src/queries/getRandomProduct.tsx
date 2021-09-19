@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Product } from "../GamePage";
+import { ROOT_API_URL } from "../publicConstants";
 
 // const getRandomProduct = async (cnt: number) => {
 //   return await axios
@@ -8,7 +9,7 @@ import { Product } from "../GamePage";
 // };
 const getRandomProduct = (cnt: number) => {
   return axios
-    .get(`http://localhost:5000/getRandomItem/${cnt}`)
+    .get(`${ROOT_API_URL}/getRandomItem/${cnt}`)
     .then((response) => response.data);
 };
 

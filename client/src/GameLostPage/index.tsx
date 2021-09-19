@@ -30,10 +30,7 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
       return;
     }
 
-    console.log(playerName, playerName.trim());
-
     document.cookie = cookie.serialize("playerName", playerName.trim());
-    console.log(cookie.parse(document.cookie));
     upsertLeaderboard({
       name: playerName.trim(),
       score: score,
@@ -112,7 +109,7 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
                   }}
                   disabled={isScoreSubmitted}
                 >
-                  Save score
+                  Submit
                 </button>
               </div>
             </div>

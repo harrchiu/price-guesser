@@ -23,7 +23,6 @@ router.get("/:count", async (req, res) => {
     retItems.push(response.Item);
     usedIds.push(randId);
   }
-  console.log("asdlkfj");
   res.send(retItems);
 });
 

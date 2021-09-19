@@ -59,7 +59,6 @@ const GamePage = () => {
       setTimeout(() => {
         var response = getRandomProduct(1);
         response.then((newProduct) => {
-          console.log(newProduct);
           setCurProducts([
             curProducts[1],
             {
@@ -84,7 +83,6 @@ const GamePage = () => {
     var response = getRandomProduct(2);
 
     response.then((newProduct) => {
-      console.log(newProduct);
       setCurProducts([
         {
           title: newProduct[0].title,
@@ -101,7 +99,6 @@ const GamePage = () => {
 
     const cookies = cookie.parse(document.cookie);
     var lastVisitedTime;
-    console.log(document.cookie);
 
     try {
       lastVisitedTime = parseInt(cookies?.lastVisit);

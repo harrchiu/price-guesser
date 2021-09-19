@@ -1,6 +1,7 @@
 import axios from "axios";
 import { GameInfo } from "../GameLostPage";
 import { Leaderboard } from "../LeaderboardPage";
+import { ROOT_API_URL } from "../publicConstants";
 import getLeaderboard from "../queries/getLeaderboard";
 
 // for an array that is ~decreasing~
@@ -50,17 +51,14 @@ const upsertLeaderboard = (game: GameInfo) => {
       dates: res.dates,
     };
 
-    console.log("inside res", res);
-    console.log("inside", leaderboard);
-
     axios
-      .post("http://localhost:5000/upsertLeaderboard", {
+      .post(ROOT_API_URL + "/upsertLeaderboard", {
         names_1: leaderboard.names,
         scores_1: leaderboard.scores,
         dates_1: leaderboard.dates,
       })
       .then((result) => {
-        console.log(result);
+        return "leaderboard upserted";
       })
       .catch((error) => {
         console.log(error);

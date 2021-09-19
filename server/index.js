@@ -13,6 +13,8 @@ import resetLeaderboardRoute from "./routes/resetLeaderboard.js";
 dotenv.config();
 
 // ----------------------------------- app -----------------------------------
+let port = process.env.PORT || 5000;
+
 const app = express();
 
 app.use(express.json());
@@ -27,7 +29,6 @@ app.use("/upsertLeaderboard", upsertLeaderboardRoute);
 app.use("/resetLeaderboard", resetLeaderboardRoute);
 
 app.use("/", (req, res) => {
-  console.log(req.body);
   res.send("this is the root backend");
 });
 
@@ -126,6 +127,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.listen(5000);
+app.listen(port);
 
 export { getItemById, upsertItem, getLeaderboard, upsertLeaderboard };

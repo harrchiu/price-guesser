@@ -1,4 +1,5 @@
 export const HOME_PAGE_URL = "http://localhost:3000";
+export const ROOT_API_URL = "http://localhost:5000";
 
 export const CORRECT_TIMEOUT = 0;
 export const INCORRECT_TIMEOUT = 0;
