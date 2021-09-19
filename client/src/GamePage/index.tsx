@@ -3,17 +3,17 @@ import cookie from "cookie";
 import getRandomProduct from "../queries/getRandomProduct";
 import GameSlot from "./GameSlot";
 import GameLostPage from "../GameLostPage";
+import NewPlayerModal from "../NewPlayerModal";
+import HeaderSection from "../HeaderSection";
 import {
   CORRECT_TIMEOUT,
   INCORRECT_TIMEOUT,
   MINIMUM_VISIT_GAP_FOR_MODAL,
   JEFF_WAITING_SRC,
+  AMAZON_PHOTO_LINK,
 } from "../publicConstants";
 
-import NewPlayerModal from "../NewPlayerModal";
-
 import "./index.css";
-import HeaderSection from "../HeaderSection";
 
 interface Product {
   title: string;
@@ -64,7 +64,7 @@ const GamePage = () => {
             {
               title: newProduct[0].title,
               price: newProduct[0].price,
-              imageSrc: newProduct[0].img,
+              imageSrc: AMAZON_PHOTO_LINK(newProduct[0].img),
             },
           ]);
         });
@@ -87,12 +87,12 @@ const GamePage = () => {
         {
           title: newProduct[0].title,
           price: newProduct[0].price,
-          imageSrc: newProduct[0].img,
+          imageSrc: AMAZON_PHOTO_LINK(newProduct[0].img),
         },
         {
           title: newProduct[1].title,
           price: newProduct[1].price,
-          imageSrc: newProduct[1].img,
+          imageSrc: AMAZON_PHOTO_LINK(newProduct[1].img),
         },
       ]);
     });

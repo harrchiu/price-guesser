@@ -114,7 +114,7 @@ const LeaderboardPage = () => {
         <FooterSection
           component={
             <div className="timezone-statement">
-              You're in {tzString ? ` (${tzString})` : ""}, right?
+              You're in {tzString ? ` ${tzString}` : ""}, right?
             </div>
           }
         />

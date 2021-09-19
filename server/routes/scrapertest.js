@@ -6,51 +6,44 @@ import fs from "fs";
 const router = express.Router();
 
 const test = async (url) => {
-  const urls = [url];
+  const res = await fetch(url);
 
-  const testRequest = urls.map(async (url) => {
-    const res = await fetch(url);
+  const html = await res.text();
+  // const $ = cheerio.load(
+  //   '<span><a><div class="p13n-sc-truncate" title="asldkf">hello</div></a></span>'
+  // );
+  const $ = cheerio.load(html);
 
-    const html = await res.text();
-    // const $ = cheerio.load(
-    //   '<span><a><div class="p13n-sc-truncate" title="asldkf">hello</div></a></span>'
-    // );
-    const $ = cheerio.load(html);
+  // fs.writeFile("Output2.txt", html, (err) => {
+  //   // In case of a error throw err.
+  //   if (err) throw err;
+  // });
 
-    // fs.writeFile("Output2.txt", html, (err) => {
-    //   // In case of a error throw err.
-    //   if (err) throw err;
-    // });
-
-    var titles = [];
-    var prices = [];
-    var images = [];
-    //".s-result-item"
-    $(
-      ".s-image",
-      ".s-image-square-aspect",
-      ".s-no-outline"
-      // ".rush-component",
-      // ".a-section",
-      // ".s-expand-height"
-      // "[class^=widgetId=search-results_],"
-      // --works kinda ^
-      // "div .s-image"
-    ).each((index, element) => {
-      console.log(element);
-      console.log($(element).attr("alt"));
-      titles.push($(element).attr("alt").trim());
-      images.push($(element).attr("src").trim());
-    });
-
-    console.log("here are the titles:", titles);
-    console.log("here are the images:", images);
-    console.log("here are the prices:", prices);
-
-    return { titles, images, prices };
+  var titles = [];
+  var prices = [];
+  var images = [];
+  $(
+    // ".s-image"
+    // ".s-image-square-aspect",
+    // ".s-no-outline"
+    "[class*=widgetId=search-results_]"
+  ).each((index, element) => {
+    titles.push($(element).find(" .s-image").attr("alt").trim());
+    images.push($(element).find(" .s-image").attr("src").trim());
+    prices.push($(element).find(".a-price .a-offscreen").text().trim());
   });
 
-  return testRequest;
+  for (var i = 0; i < titles.length; i++) {
+    console.log(titles[i]);
+  }
+  for (var i = 0; i < prices.length; i++) {
+    console.log(prices[i]);
+  }
+  for (var i = 0; i < images.length; i++) {
+    console.log(images[i]);
+  }
+
+  return { titles, images, prices };
 };
 
 router.get("/", async (req, res) => {
