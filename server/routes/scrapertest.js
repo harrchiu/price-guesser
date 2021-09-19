@@ -47,12 +47,12 @@ const test = async (url) => {
 };
 
 router.get("/", async (req, res) => {
+  console.log(link);
   var link =
     req.body?.link ??
     "https://www.amazon.ca/s?k=office+items&rh=n%3A6304012011&dc&qid=1632012670&rnid=5264023011&ref=sr_nr_n_1";
   const testResult = await test(link);
   res.send(testResult);
-  //"https://www.amazon.ca/s?k=office+items&rh=n%3A6304012011&dc&qid=1632012670&rnid=5264023011&ref=sr_nr_n_1"
 });
 
 export default router;

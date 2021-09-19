@@ -1,8 +1,9 @@
 import axios from "axios";
+import { ROOT_API_URL } from "../publicConstants";
 
 const getLeaderboard = () => {
   return axios
-    .get(`http://localhost:5000/getLeaderboard/`)
+    .get(`${ROOT_API_URL}/getLeaderboard/`)
     .then((response) => response.data);
 };
 

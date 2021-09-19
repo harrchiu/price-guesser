@@ -63,7 +63,9 @@ const LeaderboardPage = () => {
   const [tzString, setTzString] = useState<string>("America/Toronto");
 
   useEffect(() => {
-    setTzString(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    setTzString(
+      Intl.DateTimeFormat().resolvedOptions().timeZone.replace("_", " ")
+    );
 
     var response = getLeaderboard();
 

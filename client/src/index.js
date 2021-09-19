@@ -4,11 +4,23 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import GamePage from "./GamePage";
 import LeaderboardPage from "./LeaderboardPage";
+import { Helmet } from "react-helmet";
 
 import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet
+      link={[
+        {
+          rel: "icon",
+          type: "image/png",
+          href: "src/media/dollar-bag.png",
+        },
+      ]}
+    >
+      <title>Price Guesser</title>
+    </Helmet>
     <Router>
       <Switch>
         <Route path="/" exact render={() => <GamePage />} />
