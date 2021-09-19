@@ -76,9 +76,6 @@ const LeaderboardPage = () => {
         dates: res.dates.slice(0, PLAYERS_TO_DISPLAY),
       });
     });
-
-    var arr = [];
-    // manually truncate
   }, []);
 
   if (leaderboard === undefined) {
@@ -128,4 +125,5 @@ const LeaderboardPage = () => {
     );
 };
 
+export type { Leaderboard };
 export default LeaderboardPage;

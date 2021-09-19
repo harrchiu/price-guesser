@@ -14,7 +14,8 @@
   border-radius: 12px;
   border-color: transparent;
 
-  padding: 40px;
+  padding: 40px 30px;
+  margin: 0px 20px;
 
   max-width: 370px;
 
@@ -33,11 +34,12 @@
 .new-player-modal__description {
   font-size: 16px;
   padding-bottom: 20px;
+  line-height: 130%;
 }
 .new-player-modal__proceed {
   background-color: white;
   border: 1px solid gray;
 }
 .new-player-modal__proceed:hover {
-  background-color: #059d05;
+  background-color: #89e081;
 }

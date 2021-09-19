@@ -7,6 +7,8 @@ import getRandomItemRoute from "./routes/getRandomItem.js";
 import upsertItemRoute from "./routes/upsertItem.js";
 import scraperTestRoute from "./routes/scrapertest.js";
 import getLeaderboardRoute from "./routes/getLeaderboard.js";
+import upsertLeaderboardRoute from "./routes/upsertLeaderboard.js";
+import resetLeaderboardRoute from "./routes/resetLeaderboard.js";
 
 dotenv.config();
 
@@ -21,6 +23,9 @@ app.use("/getRandomItem", getRandomItemRoute);
 app.use("/upsertItem", upsertItemRoute);
 app.use("/scraperTest", scraperTestRoute);
 app.use("/getLeaderboard", getLeaderboardRoute);
+app.use("/upsertLeaderboard", upsertLeaderboardRoute);
+app.use("/resetLeaderboard", resetLeaderboardRoute);
+
 app.use("/", (req, res) => {
   console.log(req.body);
   res.send("this is the root backend");
@@ -57,9 +62,10 @@ const getItemById = async (id) => {
   return item;
 };
 
+// get leaderboard DB
 const getLeaderboard = async (cnt) => {
   const params = {
-    TableName: "price-guesser-leaderboard",
+    TableName: LEADERBOARD_TABLE_NAME,
     Key: {
       info: cnt,
     },
@@ -76,7 +82,33 @@ const getLeaderboard = async (cnt) => {
   return item;
 };
 
-// upsert DB
+// upsert leaderboard DB
+const upsertLeaderboard = async (names_1, scores_1, dates_1) => {
+  const names_params = {
+    TableName: LEADERBOARD_TABLE_NAME,
+    Item: names_1,
+  };
+  const scores_params = {
+    TableName: LEADERBOARD_TABLE_NAME,
+    Item: scores_1,
+  };
+  const dates_params = {
+    TableName: LEADERBOARD_TABLE_NAME,
+    Item: dates_1,
+  };
+
+  try {
+    await docClient.put(names_params).promise();
+    await docClient.put(scores_params).promise();
+    await docClient.put(dates_params).promise();
+  } catch (e) {
+    console.log(JSON.stringify(e));
+    return { e };
+  }
+  return { updateLeaderboard: "yup it happened ?" };
+};
+
+// upsert product DB
 const upsertItem = async (item) => {
   const params = {
     TableName: PRODUCT_TABLE_NAME,
@@ -96,4 +128,4 @@ app.use(function (req, res, next) {
 
 app.listen(5000);
 
-export { getItemById, upsertItem, getLeaderboard };
+export { getItemById, upsertItem, getLeaderboard, upsertLeaderboard };

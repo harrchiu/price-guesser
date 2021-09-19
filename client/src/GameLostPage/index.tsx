@@ -10,14 +10,37 @@ import { useEffect, useState } from "react";
 
 import "./index.css";
 
-const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
-  var curUnixTime;
+type GameInfo = {
+  name: string;
+  score: number;
+  unixDate: number;
+};
 
+const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
   const [playerName, setPlayerName] = useState<string>("");
-  const [holdingPlayerName, setHoldingPlayerName] = useState<string>("");
 
   const [losingPhrase, setLosingPhrase] = useState("");
   const [pageBackground, setPageBackground] = useState("");
+
+  const [isScoreSubmitted, setIsScoreSubmitted] = useState(false);
+
+  const submitName = () => {
+    if (!playerName.trim()) {
+      alert("Enter a valid name and try again.");
+      return;
+    }
+
+    console.log(playerName, playerName.trim());
+
+    document.cookie = cookie.serialize("playerName", playerName.trim());
+    console.log(cookie.parse(document.cookie));
+    upsertLeaderboard({
+      name: playerName.trim(),
+      score: score,
+      unixDate: Math.floor(Date.now() / 1000),
+    });
+    setIsScoreSubmitted(true);
+  };
 
   useEffect(() => {
     const theJeffFactor =
@@ -37,15 +60,7 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
     } catch (error) {
       console.log(error);
     }
-
-    const cookies = cookie.parse(document.cookie);
-    var lastVisitedTime, lastScore, cookieName;
-    try {
-      lastVisitedTime = parseInt(cookies?.lastVisit);
-    } catch (error) {
-      lastVisitedTime = -1;
-      console.log(error);
-    }
+    setPlayerName(cookie.parse(document.cookie).playerName);
   }, []);
 
   return (
@@ -82,25 +97,22 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
               <input
                 className="name-collection__input"
                 onChange={(event) => {
-                  setHoldingPlayerName(event.target.value);
+                  setPlayerName(event.target.value);
                 }}
-                placeholder={!!playerName ? playerName : "Your name"}
+                placeholder="Your name"
+                defaultValue={cookie.parse(document.cookie).playerName}
+                disabled={isScoreSubmitted}
                 maxLength={10}
               />
               <div className="name-collection__button-wrapper">
                 <button
                   className="name-collection__button"
                   onClick={() => {
-                    if (!holdingPlayerName) {
-                      return;
-                    }
-                    setPlayerName(holdingPlayerName);
-                    console.log(playerName);
-                    cookie.serialize("playerName", playerName);
-                    upsertLeaderboard();
+                    submitName();
                   }}
+                  disabled={isScoreSubmitted}
                 >
-                  {!playerName ? "Submit" : "Change Name"}
+                  Save score
                 </button>
               </div>
             </div>
@@ -111,4 +123,5 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
   );
 };
 
+export type { GameInfo };
 export default GameLostPage;
