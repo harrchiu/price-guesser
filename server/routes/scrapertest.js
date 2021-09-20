@@ -7,17 +7,10 @@ const router = express.Router();
 
 const test = async (url) => {
   const res = await fetch(url);
+  console.log(res);
 
   const html = await res.text();
-  // const $ = cheerio.load(
-  //   '<span><a><div class="p13n-sc-truncate" title="asldkf">hello</div></a></span>'
-  // );
   const $ = cheerio.load(html);
-
-  // fs.writeFile("Output2.txt", html, (err) => {
-  //   // In case of a error throw err.
-  //   if (err) throw err;
-  // });
 
   var titles = [];
   var prices = [];
@@ -28,30 +21,33 @@ const test = async (url) => {
     // ".s-no-outline"
     "[class*=widgetId=search-results_]"
   ).each((index, element) => {
-    titles.push($(element).find(" .s-image").attr("alt").trim());
-    images.push($(element).find(" .s-image").attr("src").trim());
+    titles.push($(element).find(".s-image").attr("alt").trim());
+    images.push($(element).find(".s-image").attr("src").trim());
     prices.push($(element).find(".a-price .a-offscreen").text().trim());
   });
 
-  for (var i = 0; i < titles.length; i++) {
-    console.log(titles[i]);
-  }
-  for (var i = 0; i < prices.length; i++) {
-    console.log(prices[i]);
-  }
-  for (var i = 0; i < images.length; i++) {
-    console.log(images[i]);
-  }
+  // for (var i = 0; i < titles.length; i++) {
+  //   console.log(titles[i]);
+  // }
+  // for (var i = 0; i < prices.length; i++) {
+  //   console.log(prices[i]);
+  // }
+  // for (var i = 0; i < images.length; i++) {
+  //   console.log(images[i]);
+  // }
 
   return { titles, images, prices };
 };
 
-router.get("/", async (req, res) => {
-  console.log(link);
+router.post("/", async (req, res) => {
+  const letters = ["a", "b", "c", "d", "e", "f", "g", "h"];
   var link =
     req.body?.link ??
-    "https://www.amazon.ca/s?k=office+items&rh=n%3A6304012011&dc&qid=1632012670&rnid=5264023011&ref=sr_nr_n_1";
+    `https://www.amazon.ca/s?k=${
+      letters[Math.floor(Math.random() * letters.length)]
+    }`;
   const testResult = await test(link);
+  // console.log(req.body);
   res.send(testResult);
 });
 
