@@ -1,5 +1,5 @@
 import express from "express";
-import { getProductbyId } from "../index.js";
+import { getProductById } from "../index.js";
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/:count", async (req, res) => {
   var retQuantity = req.params.count;
 
-  const productTableInfo = await getProductbyId("-1");
+  const productTableInfo = await getProductById("-1");
 
   const PRODUCT_DB_ITEM_COUNT = productTableInfo?.Item?.productCount ?? 5;
 
@@ -21,7 +21,7 @@ router.get("/:count", async (req, res) => {
       randId = Math.floor(Math.random() * PRODUCT_DB_ITEM_COUNT) + 1;
     } while (usedIds.includes(randId));
 
-    var response = await getProductbyId(randId.toString());
+    var response = await getProductById(randId.toString());
     retItems.push(response.Item);
     usedIds.push(randId);
   }

@@ -4,13 +4,10 @@ import { upsertProduct } from "../index.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
+  console.log(req.body);
   const newProduct = req.body.product;
   try {
     await upsertProduct(newProduct);
-    console.log(
-      "successfully uploaded product with id:",
-      req.body?.product?.id
-    );
     res.send(newProduct);
   } catch (e) {
     res.send(JSON.stringify(e));
@@ -34,10 +31,10 @@ router.post("/byarrays", async (req, res) => {
     for (var index = 0; index < newProductIds.length; index++) {
       try {
         await upsertProduct({
-            id: newProductIds[index],
-            title: newProductTitles[index],
-            price: newProductPrices[index],
-            img: newProductImages[index],
+          id: newProductIds[index],
+          title: newProductTitles[index],
+          price: newProductPrices[index],
+          img: newProductImages[index],
         });
 
         successfullySent.push(newProductIds[index]);

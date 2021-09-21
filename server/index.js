@@ -9,6 +9,7 @@ import scraperTestRoute from "./routes/scrapertest.js";
 import getLeaderboardRoute from "./routes/getLeaderboard.js";
 import upsertLeaderboardRoute from "./routes/upsertLeaderboard.js";
 import resetLeaderboardRoute from "./routes/resetLeaderboard.js";
+import getProductByIdRoute from "./routes/getProductById.js";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ app.use("/scraperTest", scraperTestRoute);
 app.use("/getLeaderboard", getLeaderboardRoute);
 app.use("/upsertLeaderboard", upsertLeaderboardRoute);
 app.use("/resetLeaderboard", resetLeaderboardRoute);
+app.use("/getProductById", getProductByIdRoute);
 
 app.use("/", (req, res) => {
   res.send("this is the root backend");
@@ -44,7 +46,7 @@ const LEADERBOARD_TABLE_NAME = process.env.LEADERBOARD_TABLE_NAME;
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 // read all of DB
-const getProductbyId = async (id) => {
+const getProductById = async (id) => {
   const params = {
     TableName: PRODUCT_TABLE_NAME,
     Key: {
@@ -134,4 +136,4 @@ app.use(function (req, res, next) {
 
 app.listen(port);
 
-export { getProductbyId, upsertProduct, getLeaderboard, upsertLeaderboard };
+export { getProductById, upsertProduct, getLeaderboard, upsertLeaderboard };
