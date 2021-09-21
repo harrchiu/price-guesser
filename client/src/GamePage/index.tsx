@@ -14,6 +14,10 @@ import {
 } from "../publicConstants";
 
 import "./index.css";
+import upsertProduct from "../mutations/upsertProduct";
+import getProductById from "../queries/getProductById";
+
+const LOADING_STRING = "Loading...";
 
 interface Product {
   title: string;
@@ -31,12 +35,12 @@ enum GameState {
 const GamePage = () => {
   const [curProducts, setCurProducts] = useState<Product[]>([
     {
-      title: "Loading...",
+      title: LOADING_STRING,
       imageSrc: JEFF_WAITING_SRC,
       price: 1,
     },
     {
-      title: "Loading...",
+      title: LOADING_STRING,
       imageSrc: JEFF_WAITING_SRC,
       price: 1,
     },
@@ -71,6 +75,15 @@ const GamePage = () => {
         setGameState(GameState.WAITING_FOR_RESPONSE);
       }, CORRECT_TIMEOUT);
     } else {
+      try {
+        getProductById("-1").then((siteStats) => {
+          siteStats.gamesPlayed += 1;
+          upsertProduct(siteStats);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
       setGameState(GameState.DISPLAYING_PRICE);
       setTimeout(() => {
         setGameState(GameState.LOST);
@@ -80,9 +93,16 @@ const GamePage = () => {
 
   // render two products on page load
   useEffect(() => {
-    var response = getRandomProduct(2);
+    try {
+      getProductById("-1").then((siteStats) => {
+        siteStats.siteVisits += 1;
+        upsertProduct(siteStats);
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
-    response.then((newProduct) => {
+    getRandomProduct(2).then((newProduct) => {
       setCurProducts([
         {
           title: newProduct[0].title,
@@ -134,6 +154,7 @@ const GamePage = () => {
               product={curProducts[index]}
               buttonClick={buttonClick}
               gameState={gameState}
+              isButtonDisabled={curProducts[index].title === LOADING_STRING}
             />
           );
         })}

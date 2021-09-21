@@ -109,7 +109,7 @@ const GameLostPage: React.FC<{ score: number }> = ({ score }) => {
                   }}
                   disabled={isScoreSubmitted}
                 >
-                  Submit
+                  {isScoreSubmitted ? "Saved!" : "Save score"}
                 </button>
               </div>
             </div>

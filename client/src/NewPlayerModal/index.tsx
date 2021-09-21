@@ -7,7 +7,6 @@ const NewPlayerModal: React.FC<{
   isVisible: Boolean;
   setVisible: Function;
 }> = ({ isVisible, setVisible }) => {
-  console.log(typeof setVisible);
   return (
     isVisible && (
       <div className="new-player-modal-mask">

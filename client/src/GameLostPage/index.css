@@ -78,14 +78,13 @@
   height: 22px;
   padding: 2px 10px;
   font-size: 16px;
-  margin-right: 5px;
   border: none;
 }
 
 .name-collection__button-wrapper {
   display: flex;
-  width: 100px;
   align-items: center;
+  justify-content: center;
 }
 .name-collection__button {
   width: unset;
@@ -93,6 +92,11 @@
   padding: 2px 10px;
   font-size: 16px;
   border-radius: 5px;
+  margin-left: 5px;
+}
+
+.name-collection__button:hover {
+  background-color: #89e081;
 }
 .name-collection__button:disabled {
   background-color: grey;

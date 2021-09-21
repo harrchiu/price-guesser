@@ -1,10 +1,10 @@
 import axios from "axios";
 import { ROOT_API_URL } from "../publicConstants";
 
-const getRandomProduct = (cnt: number) => {
+const getProductById = (id: string) => {
   return axios
-    .get(`${ROOT_API_URL}/getRandomItem/${cnt}`)
+    .get(`${ROOT_API_URL}/getProductById/${id}`)
     .then((response) => response.data);
 };
 
-export default getRandomProduct;
+export default getProductById;

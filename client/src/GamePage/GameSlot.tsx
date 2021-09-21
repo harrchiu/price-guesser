@@ -6,8 +6,9 @@ import "./index.css";
 const GameSlot: React.FC<{
   product: Product;
   gameState: GameState;
+  isButtonDisabled: boolean;
   buttonClick: (price: number) => void;
-}> = ({ product, gameState, buttonClick }) => {
+}> = ({ product, gameState, isButtonDisabled, buttonClick }) => {
   const isPriceVisible = gameState !== GameState.WAITING_FOR_RESPONSE;
 
   return (
@@ -35,6 +36,7 @@ const GameSlot: React.FC<{
             onClick={() => {
               buttonClick(product.price);
             }}
+            disabled={isButtonDisabled}
           >
             This one!
           </button>
