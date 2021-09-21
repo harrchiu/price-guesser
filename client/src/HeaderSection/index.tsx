@@ -18,6 +18,13 @@ const HeaderSection: React.FC<{ isLeaderboards?: Boolean }> = ({
         <a href="/leaderboard">Leaderboards</a>
       )}
       <a
+        href="https://amazon-scraper.netlify.app"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Amazon Scraper
+      </a>
+      <a
         href="https://github.com/harrchiu/price-guesser"
         target="_blank"
         rel="noreferrer"

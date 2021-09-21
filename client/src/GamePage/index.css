@@ -1,5 +1,3 @@
-/* @import (reference) "~antd/lib/style/themes/default.css"; */
-
 .game-container {
   display: flex;
   flex-direction: row;
@@ -97,10 +95,16 @@
 .product-info__price--dummy {
   font-size: 24px;
   padding-bottom: 15px;
-  color: #6bd2ff;
+  /* color: #6bd2ff; */
+  color: rgb(254, 202, 91);
+  transition: 0.025s all linear;
 }
 .product-info__price--dummy {
+  transition: none;
   color: transparent;
+}
+.product-info__price--higher {
+  color: rgb(113, 254, 91);
 }
 
 .product-info__button {

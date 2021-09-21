@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 import { Product, GameState } from "./index";
 
@@ -7,8 +8,9 @@ const GameSlot: React.FC<{
   product: Product;
   gameState: GameState;
   isButtonDisabled: boolean;
+  isHigherPrice: boolean;
   buttonClick: (price: number) => void;
-}> = ({ product, gameState, isButtonDisabled, buttonClick }) => {
+}> = ({ product, gameState, isButtonDisabled, isHigherPrice, buttonClick }) => {
   const isPriceVisible = gameState !== GameState.WAITING_FOR_RESPONSE;
 
   return (
@@ -25,7 +27,11 @@ const GameSlot: React.FC<{
         </div>
         <div className="product-info-lower">
           {isPriceVisible ? (
-            <div className="product-info__price">
+            <div
+              className={classNames("product-info__price", {
+                "product-info__price--higher": isHigherPrice,
+              })}
+            >
               ${product.price.toFixed(2)}
             </div>
           ) : (

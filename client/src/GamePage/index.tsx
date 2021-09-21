@@ -130,7 +130,6 @@ const GamePage = () => {
   }, []);
 
   // return either in-game or lost page
-  const gameSlotIndexArray = [0, 1];
   if (gameState === GameState.LOST) {
     return (
       <>
@@ -148,16 +147,26 @@ const GamePage = () => {
           <div className="prompt-section__title">So, which one costs more?</div>
           <div className="prompt-section__score">Score: {curScore}</div>
         </div>
-        {gameSlotIndexArray.map((index) => {
-          return (
-            <GameSlot
-              product={curProducts[index]}
-              buttonClick={buttonClick}
-              gameState={gameState}
-              isButtonDisabled={curProducts[index].title === LOADING_STRING}
-            />
-          );
-        })}
+        <GameSlot
+          product={curProducts[0]}
+          buttonClick={buttonClick}
+          gameState={gameState}
+          isButtonDisabled={curProducts[0].title === LOADING_STRING}
+          isHigherPrice={
+            curProducts[0].price >=
+            (curProducts[0].price + curProducts[1].price) / 2
+          }
+        />
+        <GameSlot
+          product={curProducts[1]}
+          buttonClick={buttonClick}
+          gameState={gameState}
+          isButtonDisabled={curProducts[1].title === LOADING_STRING}
+          isHigherPrice={
+            curProducts[1].price >=
+            (curProducts[0].price + curProducts[1].price) / 2
+          }
+        />
       </div>
       <NewPlayerModal
         isVisible={isGuideModalVisible}

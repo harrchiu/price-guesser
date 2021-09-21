@@ -7,7 +7,7 @@ export const ROOT_API_URL = "https://price-guesser-api1.herokuapp.com";
 // export const CORRECT_TIMEOUT = 0;
 // export const INCORRECT_TIMEOUT = 0;
 export const CORRECT_TIMEOUT = 1000;
-export const INCORRECT_TIMEOUT = 1750;
+export const INCORRECT_TIMEOUT = 2000;
 
 // export const MINIMUM_VISIT_GAP_FOR_MODAL = 2; //60 * 60; // 1 hour;
 export const MINIMUM_VISIT_GAP_FOR_MODAL = 60 * 60; // 1 hour;
