@@ -5,6 +5,8 @@ import GameSlot from "./GameSlot";
 import GameLostPage from "../GameLostPage";
 import NewPlayerModal from "../NewPlayerModal";
 import HeaderSection from "../HeaderSection";
+import upsertProduct from "../mutations/upsertProduct";
+import getProductById from "../queries/getProductById";
 import {
   CORRECT_TIMEOUT,
   INCORRECT_TIMEOUT,
@@ -14,8 +16,6 @@ import {
 } from "../publicConstants";
 
 import "./index.css";
-import upsertProduct from "../mutations/upsertProduct";
-import getProductById from "../queries/getProductById";
 
 const LOADING_STRING = "Loading...";
 
@@ -48,6 +48,8 @@ const GamePage = () => {
   const [curScore, setCurScore] = useState(0);
   const [gameState, setGameState] = useState(GameState.WAITING_FOR_RESPONSE);
   const [isGuideModalVisible, setIsGuideModalVisible] = useState(true);
+
+  const [totalGuesses, setTotalGuesses] = useState(-1);
 
   const buttonClick = async (productPrice: number) => {
     if (gameState === GameState.DISPLAYING_PRICE) return;
@@ -84,6 +86,15 @@ const GamePage = () => {
         console.log(error);
       }
 
+      // update guesses here
+      // jic user quits before loading lost page
+      getProductById("-1")
+        .then((res) => {
+          res.pricesGuessed += curScore + 1;
+          upsertProduct(res);
+        })
+        .catch();
+
       setGameState(GameState.DISPLAYING_PRICE);
       setTimeout(() => {
         setGameState(GameState.LOST);
@@ -95,6 +106,8 @@ const GamePage = () => {
   useEffect(() => {
     try {
       getProductById("-1").then((siteStats) => {
+        setTotalGuesses(siteStats.pricesGuessed.toString());
+
         siteStats.siteVisits += 1;
         upsertProduct(siteStats);
       });
@@ -138,10 +151,16 @@ const GamePage = () => {
       </>
     );
   }
+
   return (
     <>
       <div className="game-container">
         <HeaderSection />
+        {curScore === 0 && totalGuesses !== -1 && (
+          <div className="game-top-right no-mobile">
+            <i>with {totalGuesses} total guesses!</i>
+          </div>
+        )}
 
         <div className="prompt-section">
           <div className="prompt-section__title">So, which one costs more?</div>

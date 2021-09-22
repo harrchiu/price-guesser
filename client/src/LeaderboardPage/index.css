@@ -33,6 +33,7 @@ th {
   font-weight: bold;
 }
 
+/* CUSTOM for this page to fit the table */
 @media only screen and (max-width: 450px) {
   .leaderboard-table__date {
     font-size: 14px;
@@ -42,8 +43,4 @@ th {
   .leaderboard-table__date {
     font-size: 10px;
   }
-}
-
-.timezone-statement {
-  /* position: absolute; */
 }

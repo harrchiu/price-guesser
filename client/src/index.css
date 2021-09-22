@@ -21,6 +21,18 @@ code {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+@media only screen and (max-width: 450px) {
+  .no-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .no-mobile {
+    display: none;
+  }
+}
+
 button {
   font-size: 18px;
 

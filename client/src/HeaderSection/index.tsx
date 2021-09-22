@@ -21,6 +21,7 @@ const HeaderSection: React.FC<{ isLeaderboards?: Boolean }> = ({
         href="https://amazon-scraper.netlify.app"
         target="_blank"
         rel="noreferrer"
+        className="no-mobile"
       >
         Amazon Scraper
       </a>

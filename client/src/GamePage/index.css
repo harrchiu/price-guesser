@@ -4,6 +4,17 @@
   flex: 1 0;
 }
 
+.game-top-right {
+  position: absolute;
+  color: rgb(167, 167, 167);
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-end;
+}
+
 .prompt-section {
   position: absolute;
 
