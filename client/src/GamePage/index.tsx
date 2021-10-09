@@ -54,23 +54,24 @@ const GamePage = () => {
   const buttonClick = async (productPrice: number) => {
     if (gameState === GameState.DISPLAYING_PRICE) return;
 
-    // on first click only
-    if (curScore === 0) {
-      await getProductById("-1")
-        .then(async (siteStats) => {
-          siteStats.gamesPlayed += 1;
-          await upsertProduct(siteStats);
-        })
-        .catch((error) => console.log(error));
-    }
-
     // game logic
     if (
       productPrice >= curProducts[0].price &&
       productPrice >= curProducts[1].price
     ) {
+      var prevScore = curScore;
       setCurScore(curScore + 1);
       setGameState(GameState.DISPLAYING_PRICE);
+
+      // update games played if on first click
+      if (prevScore === 0) {
+        await getProductById("-1")
+          .then(async (siteStats) => {
+            siteStats.gamesPlayed += 1;
+            await upsertProduct(siteStats);
+          })
+          .catch((error) => console.log(error));
+      }
 
       setTimeout(() => {
         var response = getRandomProduct(1);
@@ -89,9 +90,11 @@ const GamePage = () => {
     } else {
       // update guesses here
       // jic user quits before loading lost page
-      await getProductById("-1")
+      getProductById("-1")
         .then(async (res) => {
           res.pricesGuessed += curScore + 1;
+          res.gamesPlayed += curScore === 0; // increment if first click
+
           upsertProduct(res);
         })
         .catch();
