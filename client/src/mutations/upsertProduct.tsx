@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ROOT_API_URL } from "../publicConstants";
 
-const upsertProduct = (product: any) => {
-  axios
+const upsertProduct = async (product: any) => {
+  await axios
     .post(ROOT_API_URL + "/upsertProduct", {
       product,
     })
