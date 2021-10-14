@@ -19,8 +19,43 @@ let port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 app.use(express.urlencoded());
+app.use(function (req, res, next) {
+  var URL_WHITELIST = process.env.URL_WHITELIST.split(" ");
+  var requestOrigin = req.headers?.origin;
+  var secretAPIKey_query = req.query?.secret_api_key;
+  var secretAPIKey_header = req.headers?.secret_api_key;
+
+  // authorize if origin is on whitelist
+  // or correct api key is permitted
+  if (
+    (requestOrigin && URL_WHITELIST.includes(requestOrigin)) ||
+    secretAPIKey_query === process.env.SECRET_API_KEY ||
+    secretAPIKey_header === process.env.SECRET_API_KEY
+  ) {
+    res.header("Access-Control-Allow-Origin", requestOrigin);
+  } else {
+    throw {
+      name: "Error",
+      level: "Show Stopper",
+      message:
+        "Authorization error. You are not allowed to access this resource.",
+      htmlMessage:
+        "Authorization error. You are not allowed to access this resource.",
+      toString: function () {
+        return this.name + ": " + this.message;
+      },
+    };
+  }
+
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
+  next();
+});
 
 app.use("/getRandomItem", getRandomItemRoute);
 app.use("/upsertProduct", upsertProductRoute);
@@ -124,15 +159,6 @@ const upsertProduct = async (product) => {
     return e;
   }
 };
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "localhost:5000");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
 
 app.listen(port);
 

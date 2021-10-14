@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     {
       info: "names_1",
       values:
-        "laura@harrison@steven@ryan@eric@albert@person@albert@harrison@steven@laura@laura",
+        "harrison@harrison@steven@ryan@eric@albert@person@albert@harrison@steven@cantbeatme@betterthanu",
     },
     { info: "scores_1", values: "30@20@10@9@8@7@6@5@4@3@2@1" },
     {
